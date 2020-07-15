@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'news_list.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   @override
-  State<StatefulWidget> createState() {
-    /*return Scaffold(
-      appBar: AppBar(),
-      body:,
-    );*/
+  Widget build(context) {
+    return Scaffold(
+      body: NewsList(),
+    );
   }
 }
