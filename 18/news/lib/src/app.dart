@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/home.dart';
 import 'blocs/stories_provider.dart';
+import 'screens/news_detail.dart';
 
 class App extends StatelessWidget {
   @override
@@ -8,7 +9,13 @@ class App extends StatelessWidget {
     return StoriesProvider(
       child: MaterialApp(
         title: 'News Application',
-        home: Home(),
+        onGenerateRoute: (RouteSettings settings) {
+          return MaterialPageRoute(
+            builder: (context) {
+              return Home();
+            },
+          );
+        },
       ),
     );
   }
