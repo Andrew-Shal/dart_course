@@ -13,6 +13,7 @@ class ItemModel {
   final List<dynamic> kids;
   final String url;
   final int score;
+  final int descendants;
 
   ItemModel.fromJson(Map<String, dynamic> parsedJson)
       : this.id = parsedJson['id'],
@@ -26,7 +27,8 @@ class ItemModel {
         this.parent = parsedJson['parent'] ?? 0,
         this.kids = parsedJson['kids'] ?? [],
         this.url = parsedJson['url'] ?? "",
-        this.score = parsedJson['score'] ?? 0;
+        this.score = parsedJson['score'] ?? 0,
+        this.descendants = parsedJson['descendants'] ?? 0;
 
   ItemModel.fromDb(Map<String, dynamic> parsedJson)
       : this.id = parsedJson['id'],
@@ -40,7 +42,8 @@ class ItemModel {
         this.parent = parsedJson['parent'] ?? 0,
         this.kids = parsedJson['kids'] ?? [],
         this.url = parsedJson['url'] ?? "",
-        this.score = parsedJson['score'] ?? 0;
+        this.score = parsedJson['score'] ?? 0,
+        this.descendants = parsedJson['descendants'] ?? 0;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -56,6 +59,7 @@ class ItemModel {
       "kids": jsonEncode(kids),
       "url": url,
       "score": score,
+      "descendants": descendants,
     };
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news/src/blocs/stories_bloc.dart';
 import '../blocs/stories_provider.dart';
 import '../widgets/news_list_tile.dart';
+import '../widgets/refresh.dart';
 
 class NewsList extends StatelessWidget {
   @override
@@ -13,7 +14,7 @@ class NewsList extends StatelessWidget {
     bloc.fetchTopIds();
 
     return Scaffold(
-      appBar: AppBar(title: Text('News Feed')),
+      appBar: AppBar(title: Text('Top News')),
       body: buildList(bloc),
     );
   }
@@ -24,14 +25,16 @@ class NewsList extends StatelessWidget {
         if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
         } else {
-          return ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, int index) {
-                bloc.fetchItem(snapshot.data[index]);
-                return NewsListTile(
-                  itemId: snapshot.data[index],
-                );
-              });
+          return Refresh(
+            ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, int index) {
+                  bloc.fetchItem(snapshot.data[index]);
+                  return NewsListTile(
+                    itemId: snapshot.data[index],
+                  );
+                }),
+          );
         }
       },
       stream: bloc.topIds,
