@@ -33,6 +33,9 @@ class NewsDbProvider implements Source, Cache {
             score INTEGER,
             title TEXT,
             descendants INTEGER
+            deleted INTEGER
+            text TEXT
+            dead INTEGER
           )
           """);
       },
@@ -54,10 +57,12 @@ class NewsDbProvider implements Source, Cache {
   }
 
   Future<int> addItem(ItemModel item) {
-    return db.insert("Items", item.toMap());
+    return db.insert("Items", item.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.ignore);
   }
 
   Future<List<int>> fetchTopIds() {
+    // ignore: todo
     // TODO: implement fetchTopIds
     throw UnimplementedError();
   }

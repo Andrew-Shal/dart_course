@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class ItemModel {
   final int id;
+  final String title;
   final bool deleted;
   final String type;
   final String by;
@@ -11,13 +12,11 @@ class ItemModel {
   final int parent;
   final List<dynamic> kids;
   final String url;
-  final double score;
-  final String title;
-  final int descendants;
+  final int score;
 
-  // TODO : here the data is not being parsed good
   ItemModel.fromJson(Map<String, dynamic> parsedJson)
       : this.id = parsedJson['id'],
+        this.title = parsedJson['title'] ?? "",
         this.deleted = parsedJson['deleted'] ?? false,
         this.type = parsedJson['type'] ?? "",
         this.by = parsedJson['by'] ?? "",
@@ -27,38 +26,36 @@ class ItemModel {
         this.parent = parsedJson['parent'] ?? 0,
         this.kids = parsedJson['kids'] ?? [],
         this.url = parsedJson['url'] ?? "",
-        this.score = parsedJson['score'] ?? 0.00,
-        this.title = parsedJson['title'] ?? "",
-        this.descendants = parsedJson['descendants'] ?? 0;
+        this.score = parsedJson['score'] ?? 0;
+
   ItemModel.fromDb(Map<String, dynamic> parsedJson)
       : this.id = parsedJson['id'],
-        this.deleted = parsedJson['deleted'] == 1,
-        this.type = parsedJson['type'],
-        this.by = parsedJson['by'],
-        this.time = parsedJson['time'],
-        this.text = parsedJson['text'],
-        this.dead = parsedJson['dead'] == 1,
-        this.parent = parsedJson['parent'],
-        this.kids = jsonDecode(parsedJson['kids']),
-        this.url = parsedJson['url'],
-        this.score = parsedJson['score'],
         this.title = parsedJson['title'],
-        this.descendants = parsedJson['descendants'];
+        this.deleted = parsedJson['deleted'] ?? false,
+        this.type = parsedJson['type'] ?? "",
+        this.by = parsedJson['by'] ?? "",
+        this.time = parsedJson['time'] ?? 0,
+        this.text = parsedJson['text'] ?? "",
+        this.dead = parsedJson['dead'] ?? false,
+        this.parent = parsedJson['parent'] ?? 0,
+        this.kids = parsedJson['kids'] ?? [],
+        this.url = parsedJson['url'] ?? "",
+        this.score = parsedJson['score'] ?? 0;
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       "id": id,
+      "title": title,
+      "deleted": deleted ? 1 : 0,
       "type": type,
       "by": by,
       "time": time,
+      "dead": dead ? 1 : 0,
       "text": text,
       "parent": parent,
+      "kids": jsonEncode(kids),
       "url": url,
       "score": score,
-      "title": title,
-      "descendants": descendants,
-      "dead": dead ? 1 : 0,
-      "deleted": deleted ? 1 : 0,
-      "kids": jsonEncode(kids),
     };
   }
 }
