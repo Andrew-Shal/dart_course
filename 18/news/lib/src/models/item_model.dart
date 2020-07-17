@@ -17,31 +17,31 @@ class ItemModel {
 
   ItemModel.fromJson(Map<String, dynamic> parsedJson)
       : this.id = parsedJson['id'],
-        this.title = parsedJson['title'] ?? "",
+        this.title = parsedJson['title'],
         this.deleted = parsedJson['deleted'] ?? false,
-        this.type = parsedJson['type'] ?? "",
-        this.by = parsedJson['by'] ?? "",
+        this.type = parsedJson['type'],
+        this.by = parsedJson['by'],
         this.time = parsedJson['time'] ?? 0,
-        this.text = parsedJson['text'] ?? "",
+        this.text = parsedJson['text'],
         this.dead = parsedJson['dead'] ?? false,
         this.parent = parsedJson['parent'] ?? 0,
         this.kids = parsedJson['kids'] ?? [],
-        this.url = parsedJson['url'] ?? "",
+        this.url = parsedJson['url'],
         this.score = parsedJson['score'] ?? 0,
         this.descendants = parsedJson['descendants'] ?? 0;
 
   ItemModel.fromDb(Map<String, dynamic> parsedJson)
       : this.id = parsedJson['id'],
         this.title = parsedJson['title'],
-        this.deleted = parsedJson['deleted'] ?? false,
-        this.type = parsedJson['type'] ?? "",
-        this.by = parsedJson['by'] ?? "",
+        this.deleted = parsedJson['deleted'] == 1 ? true : false,
+        this.type = parsedJson['type'],
+        this.by = parsedJson['by'],
         this.time = parsedJson['time'] ?? 0,
-        this.text = parsedJson['text'] ?? "",
-        this.dead = parsedJson['dead'] ?? false,
+        this.text = parsedJson['text'],
+        this.dead = parsedJson['dead'] == 1 ? true : false,
         this.parent = parsedJson['parent'] ?? 0,
-        this.kids = parsedJson['kids'] ?? [],
-        this.url = parsedJson['url'] ?? "",
+        this.kids = jsonDecode(parsedJson['kids']) ?? [],
+        this.url = parsedJson['url'],
         this.score = parsedJson['score'] ?? 0,
         this.descendants = parsedJson['descendants'] ?? 0;
 

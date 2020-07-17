@@ -15,7 +15,7 @@ class NewsDbProvider implements Source, Cache {
 
   void init() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'items.db');
+    final path = join(documentsDirectory.path, 'items5.db');
 
     db = await openDatabase(
       path,
@@ -32,10 +32,11 @@ class NewsDbProvider implements Source, Cache {
             url TEXT,
             score INTEGER,
             title TEXT,
-            descendants INTEGER
-            deleted INTEGER
-            text TEXT
-            dead INTEGER
+            descendants INTEGER,
+            deleted INTEGER,
+            text TEXT,
+            dead INTEGER,
+            parent INTEGER
           )
           """);
       },
@@ -51,6 +52,7 @@ class NewsDbProvider implements Source, Cache {
     );
 
     if (maps.length > 0) {
+      print('data:${maps.first}');
       return ItemModel.fromDb(maps.first);
     }
     return null;

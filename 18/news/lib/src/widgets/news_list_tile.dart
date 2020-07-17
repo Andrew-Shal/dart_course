@@ -32,7 +32,7 @@ class NewsListTile extends StatelessWidget {
     return Column(children: [
       ListTile(
           onTap: () {
-            // print('${item.id} was tapped!');
+            print('${item.id} was tapped!');
             Navigator.pushNamed(context, '/${item.id}');
           },
           title: Text(item.title),
