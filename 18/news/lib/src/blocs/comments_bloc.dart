@@ -25,6 +25,7 @@ class CommentsBloc {
         print(index);
         cache[id] = _repository.fetchItem(id);
         cache[id].then((ItemModel item) {
+          //if (item.deleted || item.dead) return;
           item.kids.forEach((kidId) => fetchItemWithComments(kidId));
         });
         return cache;
